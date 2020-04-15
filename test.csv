@@ -1,4 +1,9 @@
-Tilaaja,Tuote,Summa,Kpl,email
-m, robot book, 15.5, 4, tina.test@gmail.com
-t, cd, 12, 1, ted.testing@gmail.com
-
+Tilaaja,Tuote,Summa,Kpl,Tuote,summa,kpl,email
+Tina Test, robot book,15.5,4,magazine,14,8, tina.test@gmail.com
+Ted Testing, cd,12,1,apple,5,2, ted.testing@gmail.com
+George R,apple,0.7,15,banana,8,7,george@myemail.com
+Joanne Grant,stuff,9.5,3,more stuff,2,3,joanne@joanne.com
+Ella Lyman,stuff,3,5,more stuff,5,11,ella@myemail.com
+Adam Cornish,stuff,7.9,7,more stuff,4.9,6,adam@fakeemail.com
+Fiona Coleman,stuff,2,2,more stuff,2.5,4,fiona@robot.com
+Brian Kerr,stuff,3.9,1,more stuff,9,2,brian@rootframework.com
