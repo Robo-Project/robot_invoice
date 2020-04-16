@@ -9,14 +9,14 @@ ${INVOICEWEBSITE}       https://app.freeinvoicebuilder.com/
 ${BROWSER}              Chrome
 @{LINES}
 ${ROWS}
-${NAME}
-@{NAMES}
+${FIRSTNAME}
+${LASTNAME}
 ${PRODUCT}
 ${PRIZE}
 ${EMAIL}
 ${ADDRESS}
-${USERNAME}             change_login_email_here 
-${PASSWORD}             change_login_password_here
+${USERNAME}             #change_login_email_here 
+${PASSWORD}             #change_login_password_here
 
 
 *** Test Cases ***
@@ -62,32 +62,32 @@ Create invoices from csv file
                 Click Element                       class=create-new-client
 
                 Wait Until Element Is Visible       id=add-client
-                ${NAME}=            Get From List   ${ROWS}     0
-                @{NAMES}=           Split String    ${NAME}
-                ${EMAIL}=           Get From List   ${ROWS}     7   
-                ${ADDRESS}=         Get From List   ${ROWS}     8
-                Input Text          name=first_name         @{NAMES}[0]
-                Input Text          name=last_name          @{NAMES}[1]
+                ${FIRSTNAME}=       Get From List   ${ROWS}     0
+                ${LASTNAME}=        Get From List   ${ROWS}     1
+                ${EMAIL}=           Get From List   ${ROWS}     8   
+                ${ADDRESS}=         Get From List   ${ROWS}     9
+                Input Text          name=first_name         ${FIRSTNAME}
+                Input Text          name=last_name          ${LASTNAME}
                 Input Text          name=email              ${EMAIL}
                 Input Text          name=address1           ${ADDRESS}
                 Submit Form         add-client
 
                 Wait Until Element Is Visible       //*[contains(text(),'Add New Invoice Item')]
                 Click Element       //*[contains(text(),'Add New Invoice Item')]
-                ${PRODUCT}=   Get From List    ${ROWS}       1   
+                ${PRODUCT}=   Get From List    ${ROWS}       2   
                 Input Text    name=item        ${PRODUCT}
-                ${PRIZE}=     Get From List    ${ROWS}       2   
+                ${PRIZE}=     Get From List    ${ROWS}       3   
                 Input Text    name=rate        ${PRIZE}
-                ${AMOUNT}     Get From List    ${ROWS}       3   
+                ${AMOUNT}     Get From List    ${ROWS}       4   
                 Input Text    name=quantity    ${AMOUNT}
 
                 Wait Until Element Is Visible  //*[contains(text(),'Add New Invoice Item')]
                 Click Element                  //*[contains(text(),'Add New Invoice Item')]
-                ${PRODUCT}=   Get From List    ${ROWS}       4   
+                ${PRODUCT}=   Get From List    ${ROWS}       5   
                 Input Text    name=item        ${PRODUCT}
-                ${PRIZE}=     Get From List    ${ROWS}       5   
+                ${PRIZE}=     Get From List    ${ROWS}       6   
                 Input Text    name=rate        ${PRIZE}
-                ${AMOUNT}     Get From List    ${ROWS}       6   
+                ${AMOUNT}     Get From List    ${ROWS}       7   
                 Input Text    name=quantity    ${AMOUNT}
                 Click Element                  //*[contains(text(),'Invoices')]
            END
