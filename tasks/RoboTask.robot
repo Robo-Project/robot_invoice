@@ -10,11 +10,13 @@ ${BROWSER}              Chrome
 @{LINES}
 ${ROWS}
 ${NAME}
+@{NAMES}
 ${PRODUCT}
 ${PRIZE}
 ${EMAIL}
-${USERNAME}         
-${PASSWORD}         
+${ADDRESS}
+${USERNAME}             change_login_email_here 
+${PASSWORD}             change_login_password_here
 
 
 *** Test Cases ***
@@ -40,8 +42,8 @@ Logging in to site
     Open Browser           url=${INVOICEWEBSITE}    browser=${BROWSER}     
     Maximize Browser Window
     Wait Until Element Is Visible       id=username
-    Input Text              id=username        
-    Input Text              id=password        
+    Input Text              id=username         ${USERNAME}       
+    Input Text              id=password         ${PASSWORD}
     Click Button            login
 
 Create invoices from csv file
@@ -52,13 +54,24 @@ Create invoices from csv file
                 Log to console     Value is ${LINE}
                 @{ROWS}=  Split String    ${LINE}     , 
                 Log to console          rivit @{ROWS} 
-                #Wait Until Element Is Visible        //*[@id="panel-two"]/div[3]/div[1]/div[2]/div[1]/div/div[2]/div[1]/div[3]/div[2]/div[2]
-                #Click Element       asiakkaan tietoihin klikkaus
-                
-                #${NAME}=   Get From List   ${ROWS}  0   
-                #Input Text              id=invoice-client-name        ${NAME}
-                #${EMAIL}=  Get From List   ${ROWS}     7   
-                #Input Text              id=invoice-client-email        ${EMAIL}
+
+                Wait Until Element Is Visible   class=client_id-field
+                Click Element                   class=client_id-field
+
+                Wait Until Element Is Visible       //*[contains(text(),'Set the client for this invoice')]
+                Click Element                       class=create-new-client
+
+                Wait Until Element Is Visible       id=add-client
+                ${NAME}=            Get From List   ${ROWS}     0
+                @{NAMES}=           Split String    ${NAME}
+                ${EMAIL}=           Get From List   ${ROWS}     7   
+                ${ADDRESS}=         Get From List   ${ROWS}     8
+                Input Text          name=first_name         @{NAMES}[0]
+                Input Text          name=last_name          @{NAMES}[1]
+                Input Text          name=email              ${EMAIL}
+                Input Text          name=address1           ${ADDRESS}
+                Submit Form         add-client
+
                 Wait Until Element Is Visible       //*[contains(text(),'Add New Invoice Item')]
                 Click Element       //*[contains(text(),'Add New Invoice Item')]
                 ${PRODUCT}=   Get From List    ${ROWS}       1   
