@@ -53,9 +53,7 @@ Create invoices from csv file
                 Wait Until Element Is Visible           class=invoices-page
                 Go To                                   ${INVOICEWEBSITE}/#build
 
-                Log to console                          Value is ${LINE}
                 @{ROWS}=  Split String                  ${LINE}     , 
-                Log to console                          rivit @{ROWS} 
 
                 Wait Until Element Is Visible           class=client_id-field
                 Click Element                           class=client_id-field
